@@ -1,0 +1,18 @@
+name: github-actions-hello
+on: [push]
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+            python-version: '3.7'
+      - run: |
+	    pip3 install -r requirements.txt
+	    python3 zad5.py
+	    cat results.csv >> report.md
+	    cml-send-comment report.md
+	
